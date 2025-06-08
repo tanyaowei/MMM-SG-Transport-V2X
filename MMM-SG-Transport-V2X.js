@@ -1,12 +1,12 @@
 /* Magic Mirror Module Arrival times for bus stops in Singapore */
 
 /* Magic Mirror
- * Module: MMM-SG-Transport-V2
+ * Module: MMM-SG-Transport-V2X
  *
  * By Moses Yong
  */
 
-Module.register("MMM-SG-Transport-V2", {
+Module.register("MMM-SG-Transport-V2X", {
 
     // Default module config.
     defaults: {

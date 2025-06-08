@@ -1,21 +1,21 @@
 {
-  "name": "mmm-sg-transport-v2",
+  "name": "mmm-sg-transport-v2x",
   "version": "1.0.2",
   "description": "MagicMirror module - Bus timings for Singapore",
-  "main": "MMM-SG-Transport-V2.js",
+  "main": "MMM-SG-Transport-V2X.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mosesyong/MMM-SG-Transport-V2.git"
+    "url": "git+https://github.com/tanyaowei/MMM-SG-Transport-V2X.git"
   },
-  "author": "Moses Yong",
+  "author": "Tan Yao Wei",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mosesyong/MMM-SG-Transport-V2/issues"
+    "url": "https://github.com/tanyaowei/MMM-SG-Transport-V2X/issues"
   },
-  "homepage": "https://github.com/mosesyong/MMM-SG-Transport-V2#readme",
+  "homepage": "https://github.com/tanyaowei/MMM-SG-Transport-V2X#readme",
   "dependencies": {
     "unirest": "^0.6.0"
   }
