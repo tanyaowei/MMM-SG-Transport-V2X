@@ -1,0 +1,27 @@
+<!-- bus_template.html -->
+<script id="bus-template" type="x-tmpl-mustache">
+  <table>
+    {{#bus_stops}}
+      <tr class="sg-transport-bus-stop-label-row">
+        <th class="sg-transport-bus-stop-label" colspan="4">{{name}}</th>
+      </tr>
+      {{#services}}
+        <tr>
+          <td>{{serviceNo}}:&nbsp;</td>
+          {{#arrivals}}
+            <td>
+              {{eta}}:&nbsp;
+              {{#stickmen}}
+                <img src="modules/MMM-SG-Transport-V2X/images/stickman.png" height="17">
+              {{/stickmen}}
+            </td>
+          {{/arrivals}}
+        </tr>
+      {{/services}}
+      {{^services}}
+        <tr><td colspan="4">No more buses</td></tr>
+      {{/services}}
+    {{/bus_stops}}
+  </table>
+</script>
+
