@@ -115,7 +115,7 @@ Module.register("MMM-SG-Transport-V2X", {
             element.innerHTML = arrivalTimeInMinutes + ":&nbsp;";
             
             // Location of stickman image
-            var pathToImage = "modules/MMM-SG-Transport-V2/images/stickman.png";
+            var pathToImage = "modules/MMM-SG-Transport-V2X/images/stickman.png";
             // Height of image
             var height = 17;
 
