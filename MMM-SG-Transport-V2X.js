@@ -12,8 +12,8 @@ Module.register("MMM-SG-Transport-V2X", {
     defaults: {
         // API details, all required
         lta_api_key: null, // this must be set
-        lta_api_url: "http://datamall2.mytransport.sg/ltaodataservice/",
-        lta_api_bus_arrival_path: "BusArrivalv2",
+        lta_api_url: "https://datamall2.mytransport.sg/ltaodataservice/v3/",
+        lta_api_bus_arrival_path: "BusArrival",
 
         // Intervals
         refresh_interval: 30 * 1000, // refresh display every 30 seconds
