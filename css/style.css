@@ -1,3 +1,47 @@
-.sg-transport-bus-stop-label {
-    text-align: left
+.header-card {
+  text-align: left;
+  font-weight: bold;
+  color: #000;
+  background-color: #afeeee;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
+
+.card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 3 cards per row */
+  gap: 16px;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;  /* Divider width */
+  background-color: #000; /* Divider color */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.col {
+  font-size: 32px;
+  padding: 15px;
+  color: #fff;
+  font-weight: bold;
+  background-clip: padding-box;
+}
+
+/* Optional: Color styling */
+.olive  {   text-align: center; background-color: #9CBB04; color: #000;  }
+.gray1  {   text-align: left; background-color: #666A6D; }
+.gray2  {   text-align: left; background-color: #808588; }
+
+
+.green  { border-left: 3px solid #69ff00; }
+.amber  { border-left: 3px solid #ffbf00; }
+.red  { border-left: 3px solid #cc310e; }
+

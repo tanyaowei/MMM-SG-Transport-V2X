@@ -99,20 +99,24 @@ Module.register("MMM-SG-Transport-V2X", {
                     .map(bus => {
                     const etaTime = new Date(bus.EstimatedArrival);
                     let etaMinutes = Math.floor((etaTime - now) / 60000);
-                    etaMinutes = etaMinutes < 1 ? "Arr" : `${etaMinutes}m`;
+                    etaMinutes = etaMinutes < 1 ? "Arr" : `${etaMinutes}`;
 
-                    let stickmen = 0;
+                    let loadColor = "";
                     switch (bus.Load) {
-                        case "SDA": stickmen = 2; break;
-                        case "LSD": stickmen = 3; break;
-                        case "SEA": stickmen = 1; break;
+                        case "SDA": loadColor = "amber"; break;
+                        case "LSD": loadColor = "red"; break;
+                        case "SEA": loadColor = "green"; break;
                     }
 
                     return {
                         eta: etaMinutes,
-                        stickmen: Array.from({ length: stickmen })
+                        color: loadColor
                     };
                     });
+
+                while (arrivals.length < 3) {
+                    arrivals.push({ eta: "-", color: "" }); // or any placeholder like "—", "N/A", etc.
+                }
 
                 return {
                     serviceNo: service.ServiceNo,
@@ -121,6 +125,7 @@ Module.register("MMM-SG-Transport-V2X", {
                 });
 
             return {
+                buscode: `${code}`,
                 name: stop.Name,
                 services
             };
