@@ -85,51 +85,66 @@ Module.register("MMM-SG-Transport-V2X", {
         }
 
         const now = new Date();
+        const soonestArrivals = [];
 
         const data = {
             bus_stops: Object.entries(this.bus_stops || {}).map(([code, stop]) => {
-            const services = (stop.Services || [])
-                .filter(service => {
-                const busNumbers = stop.BusNumbers;
-                return !busNumbers || busNumbers.includes(service.ServiceNo);
-                })
-                .map(service => {
-                const arrivals = [service.NextBus, service.NextBus2, service.NextBus3]
-                    .filter(bus => bus && bus.EstimatedArrival && bus.EstimatedArrival !== "")
-                    .map(bus => {
-                    const etaTime = new Date(bus.EstimatedArrival);
-                    let etaMinutes = Math.floor((etaTime - now) / 60000);
-                    etaMinutes = etaMinutes < 1 ? "Arr" : `${etaMinutes}`;
+                const services = (stop.Services || [])
+                    .filter(service => {
+                        const busNumbers = stop.BusNumbers;
+                        return !busNumbers || busNumbers.includes(service.ServiceNo);
+                    })
+                    .map(service => {
+                        const arrivals = [service.NextBus, service.NextBus2, service.NextBus3]
+                            .filter(bus => bus && bus.EstimatedArrival && bus.EstimatedArrival !== "")
+                            .map(bus => {
+                                const etaTime = new Date(bus.EstimatedArrival);
+                                let etaMinutes = Math.floor((etaTime - now) / 60000);
+                                etaMinutes = etaMinutes < 1 ? "Arr" : `${etaMinutes}`;
 
-                    let loadColor = "";
-                    switch (bus.Load) {
-                        case "SDA": loadColor = "amber"; break;
-                        case "LSD": loadColor = "red"; break;
-                        case "SEA": loadColor = "green"; break;
-                    }
+                                let loadColor = "";
+                                switch (bus.Load) {
+                                    case "SDA": loadColor = "amber"; break;
+                                    case "LSD": loadColor = "red"; break;
+                                    case "SEA": loadColor = "green"; break;
+                                }
 
-                    return {
-                        eta: etaMinutes,
-                        color: loadColor
-                    };
+                                // Track soonest arrivals
+                                if (!isNaN(etaMinutes)) {
+                                    soonestArrivals.push({
+                                        eta: parseInt(etaMinutes),
+                                        serviceNo: service.ServiceNo,
+                                        busstopcode: code,
+                                        name: stop.Name,
+                                        color: loadColor
+                                    });
+                                }
+
+                                return {
+                                    eta: etaMinutes,
+                                    color: loadColor
+                                };
+                            });
+
+                        while (arrivals.length < 3) {
+                            arrivals.push({ eta: "-", color: "" });
+                        }
+
+                        return {
+                            serviceNo: service.ServiceNo,
+                            arrivals
+                        };
                     });
 
-                while (arrivals.length < 3) {
-                    arrivals.push({ eta: "-", color: "" }); // or any placeholder like "—", "N/A", etc.
-                }
-
                 return {
-                    serviceNo: service.ServiceNo,
-                    arrivals
+                    busstopcode: `${code}`,
+                    name: stop.Name,
+                    services
                 };
-                });
-
-            return {
-                buscode: `${code}`,
-                name: stop.Name,
-                services
-            };
-            })
+            }),
+            top_arrivals: soonestArrivals
+                .sort((a, b) => a.eta - b.eta)
+                .slice(0, 8)
         };
 
         wrapper.innerHTML = Mustache.render(this.template, data);

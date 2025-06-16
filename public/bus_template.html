@@ -5,8 +5,8 @@
     <tr>
       <td>
         <div class="header-card">
-          <div>{{buscode}}</div>
-          <div>{{name}}</div>
+          <div class="code">{{busstopcode}}</div>
+          <div class="name">{{name}}</div>
         </div>
       </td>
     </tr>
@@ -22,7 +22,9 @@
           </li>
         {{/services}}
         {{^services}}
-          <li><div class="col gray2">No more buses</div></li>
+          <li>
+            <div class="col">No more buses</div>
+          </li>
         {{/services}}
       </ul>
       </td>
