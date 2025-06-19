@@ -11,13 +11,37 @@
       </td>
     </tr>
     <tr>
+      <td class="soonest-section">
+        <ul class="soonest-list horizontal">
+          {{#top_arrivals}}
+            <li class="chevron-item">
+              <div class="chevron-left">
+                <span class="bus-no">{{serviceNo}}</span>
+                <span class="eta {{color}}">{{etaText}} min</span>
+              </div>
+            </li>
+          {{/top_arrivals}}
+        </ul>
+      </td>
+    </tr>
+    <tr>
       <td>
       <ul class="card-list">
         {{#services}}
           <li class="card">
-            <div class="col olive">{{serviceNo}}</div>            
+            <div class="col-svc olive svc">{{serviceNo}}</div>            
             {{#arrivals}}
-            <div class="col gray1 {{ color }}">{{eta}}</div>
+            <div class="col-eta gray1 {{ color }}">
+              <div class="eta-wrap">
+                {{#isLessThanOne}}
+                  <div class="eta-time">{{etaText}}</div>
+                {{/isLessThanOne}}
+                {{^isLessThanOne}}
+                  <div class="eta-time">{{etaText}}</div>
+                  <div class="eta-min">min</div>
+                {{/isLessThanOne}}
+              </div>
+            </div>
             {{/arrivals}}
           </li>
         {{/services}}

@@ -85,10 +85,10 @@ Module.register("MMM-SG-Transport-V2X", {
         }
 
         const now = new Date();
-        const soonestArrivals = [];
 
         const data = {
             bus_stops: Object.entries(this.bus_stops || {}).map(([code, stop]) => {
+                const soonestArrivals = [];
                 const services = (stop.Services || [])
                     .filter(service => {
                         const busNumbers = stop.BusNumbers;
@@ -100,7 +100,8 @@ Module.register("MMM-SG-Transport-V2X", {
                             .map(bus => {
                                 const etaTime = new Date(bus.EstimatedArrival);
                                 let etaMinutes = Math.floor((etaTime - now) / 60000);
-                                etaMinutes = etaMinutes < 1 ? "Arr" : `${etaMinutes}`;
+                                let isLessThanOne = etaMinutes < 1;
+                                let etaText = etaMinutes < 1 ? "Arr" : `${etaMinutes}`;
 
                                 let loadColor = "";
                                 switch (bus.Load) {
@@ -110,24 +111,24 @@ Module.register("MMM-SG-Transport-V2X", {
                                 }
 
                                 // Track soonest arrivals
-                                if (!isNaN(etaMinutes)) {
-                                    soonestArrivals.push({
-                                        eta: parseInt(etaMinutes),
-                                        serviceNo: service.ServiceNo,
-                                        busstopcode: code,
-                                        name: stop.Name,
-                                        color: loadColor
-                                    });
-                                }
+                                soonestArrivals.push({
+                                    eta: etaMinutes,
+                                    etaText: etaText,
+                                    isLessThanOne: isLessThanOne,
+                                    serviceNo: service.ServiceNo,
+                                    color: loadColor
+                                });
+
 
                                 return {
-                                    eta: etaMinutes,
+                                    etaText: etaText,
+                                    isLessThanOne: isLessThanOne,
                                     color: loadColor
                                 };
                             });
 
                         while (arrivals.length < 3) {
-                            arrivals.push({ eta: "-", color: "" });
+                            arrivals.push({ eta: "-", isLessThanOne: true, color: "" });
                         }
 
                         return {
@@ -136,15 +137,24 @@ Module.register("MMM-SG-Transport-V2X", {
                         };
                     });
 
+                services.sort((a, b) => {
+                const numA = parseInt(a.serviceNo, 10);
+                const numB = parseInt(b.serviceNo, 10);
+                if (!isNaN(numA) && !isNaN(numB)) {
+                    return numA - numB;
+                }
+                return a.serviceNo.localeCompare(b.serviceNo); // fallback for alphanumerics like "2A", "NR6"
+                });
+
                 return {
                     busstopcode: `${code}`,
                     name: stop.Name,
+                    top_arrivals: soonestArrivals
+                        .sort((a, b) => a.eta - b.eta)
+                        .slice(0, 5),
                     services
                 };
             }),
-            top_arrivals: soonestArrivals
-                .sort((a, b) => a.eta - b.eta)
-                .slice(0, 8)
         };
 
         wrapper.innerHTML = Mustache.render(this.template, data);
