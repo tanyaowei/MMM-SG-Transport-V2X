@@ -15,9 +15,16 @@
         <ul class="soonest-list horizontal">
           {{#top_arrivals}}
             <li class="chevron-item">
+              <div>
+                {{#isLessThanOne}}
+                  <span class="eta-arr">{{etaText}}</span>
+                {{/isLessThanOne}}
+                {{^isLessThanOne}}
+                  <span class="eta">{{etaText}} min</span>
+                {{/isLessThanOne}}
+              </div>
               <div class="chevron-left">
                 <span class="bus-no">{{serviceNo}}</span>
-                <span class="{{color}}">{{etaText}} min</span>
               </div>
             </li>
           {{/top_arrivals}}
@@ -31,7 +38,7 @@
           <li class="card">
             <div class="col-svc olive svc">{{serviceNo}}</div>            
             {{#arrivals}}
-            <div class="col-eta gray1 {{ color }}">
+            <div class="col-eta gray {{ color }}">
               <div class="eta-wrap">
                 {{#isLessThanOne}}
                   <div class="eta-time">{{etaText}}</div>
@@ -47,7 +54,7 @@
         {{/services}}
         {{^services}}
           <li>
-            <div class="col">No more buses</div>
+            <div>No more buses</div>
           </li>
         {{/services}}
       </ul>

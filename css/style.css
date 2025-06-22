@@ -1,5 +1,5 @@
 .header-section {
-  margin-bottom: 5px
+  padding: 10px 0 5px 0;
 }
 
 .header-card {
@@ -96,8 +96,7 @@
 
 /* Optional: Color styling */
 .olive  {   text-align: center; background-color: #9CBB04; color: #000;  }
-.gray1  {   text-align: left; background-color: #666A6D; }
-.gray2  {   text-align: left; background-color: #808588; }
+.gray  {   text-align: left; background-color: #666A6D; }
 
 
 .green  { border-left: 3px solid #69ff00; }
@@ -110,56 +109,47 @@
 
 .soonest-list.horizontal {
   display: flex;
-  flex-wrap: wrap;              /* Allow wrapping to stretch into rows if needed */
-  overflow-x: auto;             /* Optional: remove if wrapping handles overflow */
-  gap: 10px;
+  flex-wrap: nowrap;           /* No wrapping */
+  overflow: hidden;            /* No scrolling */
   list-style: none;
-  padding: 10px;
+  padding: 10px 15px 10px 15px;
   margin: 0;
-  border: 2px solid #ccc;
+  border: 2px solid #808588;
   border-radius: 8px;
+  gap: 20px;                       /* Remove gap to fit exactly */
+  width: 100%;                 /* Make sure it fills the container */
+  box-sizing: border-box;      /* Include padding in width */
 }
 
 .chevron-item {
-  flex: 1 0 auto;
+  flex: 0 0 18%;               /* Exactly 20% width */
+  max-width: 18%;
+  white-space: nowrap;
 }
 
 .chevron-left {
   position: relative;
-  background-color: #e0f7fa;
+  background-color: #9CBB04;
   color: #000;
-  padding: 10px 16px 10px 16px;
   border-radius: 4px;
-  font-size: 14px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
   clip-path: polygon(15px 0%, 100% 0%, 100% 100%, 15px 100%, 0% 50%);
 }
 
 .bus-no {
+  font-size: 48px;
   font-weight: bold;
 }
 
-.bus-stop {
-  font-size: 90%;
-  color: #333;
-  word-break: break-word;
-}
-
 .eta {
-  font-size: 90%;
+  color: #808588;
+  font-size: 24px;
+  font-weight: bold;
 }
 
-.eta.green {
-  color: green;
+.eta-arr {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
 }
-
-.eta.amber {
-  color: orange;
-}
-
-.eta.red {
-  color: red;
-}
-
