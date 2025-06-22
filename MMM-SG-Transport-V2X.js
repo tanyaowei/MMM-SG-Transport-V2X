@@ -128,7 +128,7 @@ Module.register("MMM-SG-Transport-V2X", {
                             });
 
                         while (arrivals.length < 3) {
-                            arrivals.push({ eta: "-", isLessThanOne: true, color: "" });
+                            arrivals.push({ etaText: "-", isLessThanOne: true, color: "" });
                         }
 
                         return {

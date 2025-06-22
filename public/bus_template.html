@@ -3,7 +3,7 @@
 <table>
   {{#bus_stops}}
     <tr>
-      <td>
+      <td class="header-section">
         <div class="header-card">
           <div class="code">{{busstopcode}}</div>
           <div class="name">{{name}}</div>
@@ -17,7 +17,7 @@
             <li class="chevron-item">
               <div class="chevron-left">
                 <span class="bus-no">{{serviceNo}}</span>
-                <span class="eta {{color}}">{{etaText}} min</span>
+                <span class="{{color}}">{{etaText}} min</span>
               </div>
             </li>
           {{/top_arrivals}}
