@@ -39,7 +39,7 @@
 
 .card {
   display: grid;
-  grid-template-columns: 28% 23% 23% 26%;
+  grid-template-columns: 28% 23% 23% 23%;
   gap: 5px;  /* Divider width */
   background-color: #000; /* Divider color */
   border-radius: 8px;
