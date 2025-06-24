@@ -110,6 +110,12 @@ Module.register("MMM-SG-Transport-V2X", {
                                     case "SEA": loadColor = "green"; break;
                                 }
 
+                                let deckerImage = "";
+                                switch (bus.Type) {
+                                    case "SD": deckerImage = "sd-image"; break;
+                                    case "DD": deckerImage = "dd-image"; break;
+                                }
+
                                 // Track soonest arrivals
                                 soonestArrivals.push({
                                     eta: etaMinutes,
@@ -122,6 +128,7 @@ Module.register("MMM-SG-Transport-V2X", {
 
                                 return {
                                     etaText: etaText,
+                                    deckerImage: deckerImage,
                                     isLessThanOne: isLessThanOne,
                                     color: loadColor
                                 };

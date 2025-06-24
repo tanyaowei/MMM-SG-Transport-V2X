@@ -28,6 +28,11 @@
               </div>
             </li>
           {{/top_arrivals}}
+          {{^top_arrivals}}
+            <li>
+              <div>No More Buses</div>
+            </li>
+          {{/top_arrivals}}
         </ul>
       </td>
     </tr>
@@ -48,13 +53,9 @@
                   <div class="eta-min">min</div>
                 {{/isLessThanOne}}
               </div>
+              <div class="{{deckerImage}}"></div> 
             </div>
             {{/arrivals}}
-          </li>
-        {{/services}}
-        {{^services}}
-          <li>
-            <div>No more buses</div>
           </li>
         {{/services}}
       </ul>

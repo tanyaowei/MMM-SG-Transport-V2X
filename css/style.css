@@ -57,17 +57,18 @@
 }
 
 .col-eta {
-  padding: 8px 8px 8px 8px;
-  margin: 0 0 0 0;
+  padding: 8px;
+  margin: 0;
   background-clip: padding-box;
   display: flex;
-  justify-content: left;
+  justify-content: space-between;  /* optional: pushes items apart */
   align-items: center;
 }
 
 .eta-wrap {
-  display: inline-block;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* or start if you want left-aligned */
 }
 
 .svc {
@@ -152,4 +153,24 @@
   color: #ffffff;
   font-size: 24px;
   font-weight: bold;
+}
+
+.dd-image {
+  width: 24px;
+  height: 48px;
+  background-image: url('../images/dd.png');
+  background-size: contain;       /* or contain */
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-left: 8px;
+}
+
+.sd-image {
+  width: 24px;
+  height: 48px;
+  background-image: url('../images/sd.png');
+  background-size: contain;       /* or contain */
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-left: 8px;
 }
