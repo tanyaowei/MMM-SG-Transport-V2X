@@ -12,8 +12,9 @@ Module.register("MMM-SG-Transport-V2X", {
     defaults: {
         // API details, all required
         lta_api_key: null, // this must be set
-        lta_api_url: "https://datamall2.mytransport.sg/ltaodataservice/v3/",
-        lta_api_bus_arrival_path: "BusArrival",
+        lta_api_url: "https://datamall2.mytransport.sg/ltaodataservice/",
+        lta_api_bus_arrival_path: "v3/BusArrival",
+        lta_api_bus_stops_path: "BusStops",
 
         // Intervals
         refresh_interval: 30 * 1000, // refresh display every 30 seconds
@@ -170,7 +171,10 @@ Module.register("MMM-SG-Transport-V2X", {
 
     socketNotificationReceived: function(notification, payload) {
 
-        if (notification === "UPDATE") {
+        if (notification === "SETUP") {
+            this.bus_stops[payload.BusStopCode].Name = payload.Name;
+        }
+        else if (notification === "UPDATE") {
             this.bus_stops[payload.BusStopCode].Services = payload.Services;
         }
         this.updateDom();
